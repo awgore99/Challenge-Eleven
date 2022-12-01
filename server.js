@@ -1,6 +1,7 @@
 var express = require("express");
 var path = require("path");
 var fs = require("fs");
+const noteData = require("./db/db.json");
 
 var app = express();
 var PORT = process.env.PORT || 3001;
@@ -18,3 +19,8 @@ app.get("*", function (req, res) {
 app.get("/notes", function(req, res) {
     res.sendFile(path.join(__dirname, "/public/notes.html"));
 });
+
+// Routing for db.json
+app.get("/api/notes", (req, res) => 
+    res.json(noteData)
+);
